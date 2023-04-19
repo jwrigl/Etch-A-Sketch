@@ -24,16 +24,35 @@ function listeners() {
 
     function changePaintColour() {
         paintColour = alert("Enter hex code of colour")
+        return paintColour;
 
     }
-    function changePixelColour() {
-        this.style.backgroundColor = pixelColour;
+    function changePixelColour(change) {
+        if (change === true) {
+            pixelColour = changePaintColour();
+        }
+        return pixelColour;
 
     }
     //selects all elements with class gridPixel
+    let isDrawing = false
     pixels = document.querySelectorAll(".gridPixel")
     pixels.forEach(pixel => { 
-        pixel.addEventListener('click', changePixelColour);
+        pixel.addEventListener('mousedown', () => {
+            isDrawing = true;
+            pixel.style.backgroundColor = changePixelColour();
+        } );
+        pixel.addEventListener('mouseover', () => {
+            if (isDrawing === true){
+                pixel.style.backgroundColor = changePixelColour();
+            };
+        });
+        pixel.addEventListener('mouseup', () => {
+            isDrawing = false 
+        });
+    document.addEventListener('mouseup', () => {
+        isDrawing = false
+    });
         
     });
 
