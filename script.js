@@ -10,23 +10,24 @@ function createGrid(size) {
         container.appendChild(pixel);
 
     }
-    container.style.display = "grid"
-    container.style.gridTemplateColumns=`repeat(${axis}, 10px)`
+    container.style.display = "grid";
+    container.style.gridTemplateColumns=`repeat(${axis}, 10px)`;
 
 }
 
 
 function listeners() {
     //default colour
-    let pixelColour = "black"
+    let pixelColour = "black";
     //selects all pixels with gridPixel class
 
-
+    // need to implement this functionality
     function changePaintColour() {
         paintColour = alert("Enter hex code of colour")
         return paintColour;
 
     }
+    // need to implement this functionality
     function changePixelColour(change) {
         if (change === true) {
             pixelColour = changePaintColour();
@@ -34,24 +35,43 @@ function listeners() {
         return pixelColour;
 
     }
+    //put this code into a function with the code to change the paint colour 
+    //so they can run together
+
+    //define new style object
+    let style = document.createElement('style');
+    style.setAttribute("id","selectedColour")
+    //writing style, change all elements with coloured class to have color
+    style.textContent = `
+      .coloured {
+        background-color: ${pixelColour};
+      }
+    `;
+    //append style to head, if changing this in the future remove
+    document.head.appendChild(style);
+
     //selects all elements with class gridPixel
-    let isDrawing = false
+    let isDrawing = false;
     pixels = document.querySelectorAll(".gridPixel")
     pixels.forEach(pixel => { 
         pixel.addEventListener('mousedown', () => {
             isDrawing = true;
-            pixel.style.backgroundColor = changePixelColour();
-        } );
+            pixel.classList.add("hovered")
+        });
         pixel.addEventListener('mouseover', () => {
-            if (isDrawing === true){
-                pixel.style.backgroundColor = changePixelColour();
+            if (isDrawing === true) {
+                pixel.classList.add("coloured")
+            pixel.classList.add("hovered")
             };
         });
         pixel.addEventListener('mouseup', () => {
-            isDrawing = false 
+            isDrawing = false;
         });
+        pixel.addEventListener("mouseout", () => {
+            pixel.classList.remove("hovered")
+        })
     document.addEventListener('mouseup', () => {
-        isDrawing = false
+        isDrawing = false;
     });
         
     });
