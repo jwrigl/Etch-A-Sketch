@@ -1,4 +1,15 @@
 .gridPixel {
     width: 10px;
     height: 10px;
+    background-color: white;
+}
+
+.gridPixel:hover {
+    background-color: grey;
+}
+
+
+body {
+    background-color: grey;
+    
 }
