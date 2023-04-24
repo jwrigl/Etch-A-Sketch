@@ -1,3 +1,5 @@
+var brushColour = "black"
+
 const colours = [
     '#FF5733',
     '#DAF7A6',
@@ -21,6 +23,7 @@ const colours = [
     '#DAF7A6'
   ];
 
+
 function createGrid(size) {
     // get square side length
     let axis = Math.sqrt(size)
@@ -30,13 +33,13 @@ function createGrid(size) {
         let pixel = document.createElement("div");
         pixel.setAttribute("class","gridPixel");
         pixel.setAttribute("id",`pixel-${i}`);
+        pixel.setAttribute("data-lastColour","black")
         container.appendChild(pixel);
 
     }
     container.style.display = "grid";
     container.style.gridTemplateColumns=`repeat(${axis}, 10px)`;
-
-}
+};
 
 function createColourPallet(colours) {
     let container = document.getElementById("palletContainer");
@@ -44,6 +47,7 @@ function createColourPallet(colours) {
         let palletColour = document.createElement("div");
         palletColour.setAttribute("class","palletColour");
         palletColour.setAttribute("id",`palletColour-${colours[i]}`);
+        palletColour.setAttribute("data-colour",colours[i])
         palletColour.style.backgroundColor = `${colours[i]}`
 
         container.appendChild(palletColour);
@@ -53,39 +57,12 @@ function createColourPallet(colours) {
     container.style.gridTemplateRows="repeat(10, 1rem)";
 
 }
+
+
+
 function listeners() {
     //default colour
-    let pixelColour = "black";
-    //selects all pixels with gridPixel class
-
-    // need to implement this functionality
-    function changePaintColour() {
-        paintColour = alert("Enter hex code of colour")
-        return paintColour;
-
-    }
-    // need to implement this functionality
-    function changePixelColour(change) {
-        if (change === true) {
-            pixelColour = changePaintColour();
-        }
-        return pixelColour;
-
-    }
     //put this code into a function with the code to change the paint colour 
-    //so they can run together
-
-    //define new style object
-    let style = document.createElement('style');
-    style.setAttribute("id","selectedColour")
-    //writing style, change all elements with coloured class to have color
-    style.textContent = `
-      .coloured {
-        background-color: ${pixelColour};
-      }
-    `;
-    //append style to head, if changing this in the future remove
-    document.head.appendChild(style);
 
     //selects all elements with class gridPixel
     let isDrawing = false;
@@ -93,29 +70,56 @@ function listeners() {
     pixels.forEach(pixel => { 
         pixel.addEventListener('mousedown', () => {
             isDrawing = true;
-            pixel.classList.add("hovered")
+            pixel.setAttribute("data-clicked",true)
+            pixel.style.backgroundColor=brushColour
         });
+        //if mouse held 
         pixel.addEventListener('mouseover', () => {
             if (isDrawing === true) {
-                pixel.classList.add("coloured")
-            pixel.classList.add("hovered")
-            };
+                pixel.setAttribute("data-lastColour",pixel.style.backgroundColor)
+                pixel.style.backgroundColor = brushColour
+            }
+            //if mouse not held 
+            else {
+                pixel.classList.add("hovered")
+                pixel.setAttribute("data-lastColour",pixel.style.backgroundColor)
+                pixel.style.backgroundColor = "grey"
+            }
         });
         pixel.addEventListener('mouseup', () => {
             isDrawing = false;
         });
         pixel.addEventListener("mouseout", () => {
-            pixel.classList.remove("hovered")
-        })
+            if (pixel.classList.contains("hovered")){
+                pixel.classList.remove("hovered");
+                if (pixel.getAttribute("data-clicked") !== "true") {
+                    pixel.style.backgroundColor = pixel.getAttribute("data-lastColour");
+                } else {
+                    pixel.style.backgroundColor = brushColour;
+                }
+            }
+        });
+    });
     document.addEventListener('mouseup', () => {
         isDrawing = false;
     });
-        
-    });
-
 }
+
+
+function colourPalletListener() {
+    colourPallet = document.querySelectorAll(".palletColour");
+    colourPallet.forEach(pallet => {
+        pallet.addEventListener("click", () => {
+            brushColour = pallet.getAttribute("data-colour")
+        })
+    })
+ 
+}
+
+
 
 
 createGrid(256)
 createColourPallet(colours)
 listeners()
+colourPalletListener()
