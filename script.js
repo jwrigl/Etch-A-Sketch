@@ -1,4 +1,6 @@
 var brushColour = "black"
+var rainbowMode = false;
+var rainbowCounter = 0
 
 const colours = [
     '#FF5733',
@@ -23,7 +25,18 @@ const colours = [
     '#DAF7A6'
   ];
 
+  const rainbow = ["red","orange","yellow","green","blue","indigo","violet"]
 
+
+function ifRainbow() {
+    if (rainbowMode === true) {
+        brushColour = rainbow[rainbowCounter]
+        rainbowCounter++
+        if (rainbowCounter>6) {
+            rainbowCounter=0;
+        }
+    }
+}
 function createGrid(size) {
     // get square side length
     let axis = Math.sqrt(size)
@@ -71,12 +84,14 @@ function listeners() {
         pixel.addEventListener('mousedown', () => {
             isDrawing = true;
             pixel.setAttribute("data-clicked",true)
+            ifRainbow()
             pixel.style.backgroundColor=brushColour
         });
         //if mouse held 
         pixel.addEventListener('mouseover', () => {
             if (isDrawing === true) {
                 pixel.setAttribute("data-lastColour",pixel.style.backgroundColor)
+                ifRainbow()
                 pixel.style.backgroundColor = brushColour
             }
             //if mouse not held 
