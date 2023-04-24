@@ -1,3 +1,26 @@
+const colours = [
+    '#FF5733',
+    '#DAF7A6',
+    '#FFC300',
+    '#581845',
+    '#C70039',
+    '#9B59B6',
+    '#FF5733',
+    '#DAF7A6',
+    '#FFC300',
+    '#581845',
+    '#C70039',
+    '#9B59B6',
+    '#FF5733',
+    '#DAF7A6',
+    '#FFC300',
+    '#581845',
+    '#C70039',
+    '#9B59B6',
+    '#FF5733',
+    '#DAF7A6'
+  ];
+
 function createGrid(size) {
     // get square side length
     let axis = Math.sqrt(size)
@@ -15,7 +38,21 @@ function createGrid(size) {
 
 }
 
+function createColourPallet(colours) {
+    let container = document.getElementById("palletContainer");
+    for (i=0;i<20;i++) {
+        let palletColour = document.createElement("div");
+        palletColour.setAttribute("class","palletColour");
+        palletColour.setAttribute("id",`palletColour-${colours[i]}`);
+        palletColour.style.backgroundColor = `${colours[i]}`
 
+        container.appendChild(palletColour);
+    }
+    container.style.display = "grid" 
+    container.style.gridTemplateColumns="repeat(2, 1rem)";
+    container.style.gridTemplateRows="repeat(10, 1rem)";
+
+}
 function listeners() {
     //default colour
     let pixelColour = "black";
@@ -77,5 +114,8 @@ function listeners() {
     });
 
 }
+
+
 createGrid(256)
+createColourPallet(colours)
 listeners()

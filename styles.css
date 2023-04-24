@@ -4,9 +4,6 @@
     background-color: white;
 }
 
-.gridPixel:hover {
-    background-color: grey;
-}
 
 
 body {
@@ -14,6 +11,3 @@ body {
     
 }
 
-.coloured:hover {
-    background-color: grey;
-}
