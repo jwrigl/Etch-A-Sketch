@@ -1,6 +1,7 @@
 var brushColour = "black"
 var rainbowMode = false;
-var rainbowCounter = 0
+var rainbowCounter = 0;
+var randomMode = false;
 
 const colours = [
     '#FF5733',
@@ -27,6 +28,14 @@ const colours = [
 
   const rainbow = ["red","orange","yellow","green","blue","indigo","violet"]
 
+  function generateRandomHex() {
+    let hexValue = "#";
+    for (i=0; i < 3; i++) {
+        hexValue = hexValue+Math.floor(Math.random()*256)
+    }
+    return hexValue;
+    
+  }
 
 function ifRainbow() {
     if (rainbowMode === true) {
@@ -37,6 +46,14 @@ function ifRainbow() {
         }
     }
 }
+
+function ifRandom() {
+    if (randomMode === true) {
+        brushColour = generateRandomHex()
+    }
+
+}
+
 function createGrid(size) {
     // get square side length
     let axis = Math.sqrt(size)
@@ -85,6 +102,7 @@ function listeners() {
             isDrawing = true;
             pixel.setAttribute("data-clicked",true)
             ifRainbow()
+            ifRandom()
             pixel.style.backgroundColor=brushColour
         });
         //if mouse held 
@@ -92,6 +110,7 @@ function listeners() {
             if (isDrawing === true) {
                 pixel.setAttribute("data-lastColour",pixel.style.backgroundColor)
                 ifRainbow()
+                ifRandom()
                 pixel.style.backgroundColor = brushColour
             }
             //if mouse not held 
