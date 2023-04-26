@@ -164,6 +164,41 @@ function clearImage() {
     } 
 }
 
+function disableButtons(buttonId) {
+    buttons = document.querySelectorAll(".buttons")
+    buttons.forEach(btn => {
+        //if buttons already disabled (i.e. disableButtons has been run previously, undisable)
+        if (btn.disabled === true) {
+            enableButtons()
+            return;
+        }
+        if (btn.id !== buttonId && btn.id !== "clearBtn"){
+            btn.disabled = true;
+        }
+
+        console.log(btn.id)
+        console.log(buttonId)
+
+
+    });
+}
+
+function enableButtons(){
+    buttons = document.querySelectorAll(".buttons")
+    buttons.forEach(btn => {
+        btn.disabled = false;
+    });
+}
+
+function rainbowBtnPress() {
+    rainbowMode=!rainbowMode
+    disableButtons("rainbow")
+}
+
+function randomBtnPress() {
+    randomMode=!randomMode
+    disableButtons("random")
+}
 createGrid(256)
 createColourPallet(colours)
 listeners()
