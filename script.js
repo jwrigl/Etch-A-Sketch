@@ -29,11 +29,19 @@ const colours = [
   const rainbow = ["red","orange","yellow","green","blue","indigo","violet"]
 
   function generateRandomHex() {
-    let hexValue = "#";
+    let hexValue = "";
+    let colourHexValue = "#"
     for (i=0; i < 3; i++) {
-        hexValue = hexValue+Math.floor(Math.random()*256)
+        let hexValue = Math.floor(Math.random()*256)
+        hexValue = hexValue.toString(16)
+        console.log(hexValue)
+       // while (hexValue.length < 3) {
+      //      hexValue = "0"+hexValue;
+       // }
+        colourHexValue = colourHexValue+hexValue
     }
-    return hexValue;
+    console.log(colourHexValue)
+    return colourHexValue;
     
   }
 
