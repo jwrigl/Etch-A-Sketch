@@ -154,7 +154,15 @@ function colourPalletListener() {
 }
 
 
-
+function clearImage() {
+    choice = confirm("Are you sure you wish to clear your work?")
+    pixels = document.querySelectorAll(".gridPixel")
+    if (choice === true) {
+        pixels.forEach( pixel => {
+            pixel.style.backgroundColor="white";
+        })
+    } 
+}
 
 createGrid(256)
 createColourPallet(colours)
