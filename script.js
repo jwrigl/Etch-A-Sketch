@@ -34,13 +34,8 @@ const colours = [
     for (i=0; i < 3; i++) {
         let hexValue = Math.floor(Math.random()*256)
         hexValue = hexValue.toString(16)
-        console.log(hexValue)
-       // while (hexValue.length < 3) {
-      //      hexValue = "0"+hexValue;
-       // }
         colourHexValue = colourHexValue+hexValue
     }
-    console.log(colourHexValue)
     return colourHexValue;
     
   }
@@ -91,8 +86,8 @@ function createColourPallet(colours) {
         container.appendChild(palletColour);
     }
     container.style.display = "grid" 
-    container.style.gridTemplateColumns="repeat(2, 1rem)";
-    container.style.gridTemplateRows="repeat(10, 1rem)";
+    container.style.gridTemplateColumns="repeat(10, 1rem)";
+    container.style.gridTemplateRows="repeat(2, 1rem)";
 
 }
 
