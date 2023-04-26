@@ -169,10 +169,9 @@ function disableButtons(buttonId) {
     buttons.forEach(btn => {
         //if buttons already disabled (i.e. disableButtons has been run previously, undisable)
         if (btn.disabled === true) {
-            enableButtons()
-            return;
+            btn.disabled = false
         }
-        if (btn.id !== buttonId && btn.id !== "clearBtn"){
+        else if (btn.id !== buttonId && btn.id !== "clearBtn"){
             btn.disabled = true;
         }
 
