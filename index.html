@@ -20,6 +20,20 @@
             <button id="rainbow" class="buttons" onclick="rainbowBtnPress()">Rainbow</button>
             <button id="random" class="buttons" onclick="randomBtnPress()">Random</button>
             <button id="clearBtn" class="buttons" onclick="clearImage()">Clear all</button>
+            <div id="sliderContainer">
+              <input type="range" min="32" max="2048" value="256" step ="8" id="mySlider">
+              <p>Grid Size: <span id="sliderValue"></span></p>
+              <script>
+                const slider = document.getElementById("mySlider");
+                const output = document.getElementById("sliderValue");
+
+                output.textContent = slider.value;
+
+                slider.addEventListener("input", () => {
+                output.textContent = slider.value;
+                })
+              </script>
+            </div>
         </div>
       <div id="gridContainer">
 
