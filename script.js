@@ -175,8 +175,6 @@ function disableButtons(buttonId) {
             btn.disabled = true;
         }
 
-        console.log(btn.id)
-        console.log(buttonId)
 
 
     });
@@ -197,6 +195,28 @@ function rainbowBtnPress() {
 function randomBtnPress() {
     randomMode=!randomMode
     disableButtons("random")
+}
+
+function deleteGrid() {
+    //grid = document.querySelectorAll(".gridPixel")
+    //grid.forEach(pixel => {
+    ///    pixel.remove()
+   // })
+    let gridContainer = document.querySelector("#gridContainer")
+    gridContainer.remove()
+    gridContainer = document.createElement("div")
+    gridContainer.setAttribute("id","gridContainer")
+    let container = document.getElementById("flexContainer")
+    container.appendChild(gridContainer)
+
+}
+
+function resizeGrid(newGridSize) {
+    deleteGrid()
+    createGrid(newGridSize)
+    listeners()
+
+
 }
 createGrid(256)
 createColourPallet(colours)
