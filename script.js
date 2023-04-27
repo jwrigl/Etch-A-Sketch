@@ -2,6 +2,7 @@ var brushColour = "black"
 var rainbowMode = false;
 var rainbowCounter = 0;
 var randomMode = false;
+var currentGridSize = 0;
 
 const colours = [
     '#FF5733',
@@ -57,9 +58,10 @@ function ifRandom() {
 
 }
 
-function createGrid(size) {
+function createGrid(axis) {
     // get square side length
-    let axis = Math.sqrt(size)
+    size = axis**2
+    currentGridSize = axis;
     let container = document.getElementById("gridContainer");
     //create x amount of pixels depending on size variable
     for (i=0;i<size;i++) {
@@ -153,6 +155,25 @@ function colourPalletListener() {
  
 }
 
+function sliderListener() {
+    const slider = document.getElementById("mySlider");
+    const output = document.getElementById("sliderValue");
+    slider.addEventListener("input", () => {
+        console.log(sliderValue)
+        let confirmation = confirm("Are you sure you wish to change the grid size?\
+        All work will be lost.")
+        if (confirmation === true) {
+            resizeGrid(slider.value)
+            output.textContent = slider.value;
+        }
+        else {
+            slider.value = currentGridSize
+            output.textContent = slider.value;
+        }
+        })
+
+}
+
 
 function clearImage() {
     choice = confirm("Are you sure you wish to clear your work?")
@@ -211,14 +232,15 @@ function deleteGrid() {
 
 }
 
-function resizeGrid(newGridSize) {
+function resizeGrid(newGridAxis) {
     deleteGrid()
-    createGrid(newGridSize)
+    createGrid(newGridAxis)
     listeners()
 
 
 }
-createGrid(256)
+createGrid(32)
 createColourPallet(colours)
 listeners()
 colourPalletListener()
+sliderListener()
