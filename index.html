@@ -12,18 +12,20 @@
       <div id="headerContainer">
         <div id="pageTitle">Etch-A-Sketch</div>
       </div>
-        <div id="buttonsContainer">
-            <div id="palletContainer">
+      <div id="toolbarContainer">
+        <div id="palletContainer">
 
-            </div>
-            <button id="eraser" class="buttons" onclick="brushColour='white'">Eraser</button>
-            <button id="rainbow" class="buttons" onclick="rainbowBtnPress()">Rainbow</button>
-            <button id="random" class="buttons" onclick="randomBtnPress()">Random</button>
-            <button id="clearBtn" class="buttons" onclick="clearImage()">Clear all</button>
-            <div id="sliderContainer">
-              <input type="range" min="16" max="128" value="64" step ="16" id="mySlider">
-              <p>Grid Size: <span id="sliderValue"></span></p>
-              <script>
+        </div>
+        <div id="buttonsContainer">
+          <button id="eraser" class="buttons" onclick="brushColour='white'">Eraser</button>
+          <button id="rainbow" class="buttons" onclick="rainbowBtnPress()">Rainbow</button>
+          <button id="random" class="buttons" onclick="randomBtnPress()">Random</button>
+          <button id="clearBtn" class="buttons" onclick="clearImage()">Clear all</button>
+        </div>
+          <div id="sliderContainer">
+            <input type="range" min="16" max="128" value="64" step ="16" id="mySlider">
+            <p>Grid Size: <span id="sliderValue"></span></p>
+            <script>
                 const slider = document.getElementById("mySlider");
                 const output = document.getElementById("sliderValue");
 
@@ -33,9 +35,9 @@
                // document.addEventListener("mousemove", (event) => {
                 //  event.preventDefault();
     //});
-              </script>
-            </div>
-        </div>
+            </script>
+          </div>
+      </div>
       <div id="gridContainer">
 
       </div>
